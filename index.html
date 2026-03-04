@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosechando Soberanía - Formación Agroecológica</title>
+    <link rel="icon" type="image/png" href="IMG/Minilogo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Markdown parser para las respuestas de Gemini -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agro: {
+                            light: '#DFF0ED',   // Verde teal claro
+                            DEFAULT: '#1E5B4F', // Verde teal institucional
+                            dark: '#133D34',    // Verde teal oscuro
+                            accent: '#A57F2C',  // Dorado bronce
+                            earth: '#7A5C3A'    // Café cálido
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(19, 61, 52, 0.55), rgba(19, 61, 52, 0.45)), url('IMG/maiz_frijol_arroz.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        @media (max-width: 768px) {
+            .hero-bg { background-attachment: scroll; }
+        }
+        /* Ocultar scrollbar pero permitir scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800" style="font-family: 'Noto Sans', sans-serif;">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <!-- Logo (Simulado) -->
+                    <div class="flex-shrink-0 flex items-center gap-2">
+                        <!-- Minilogo en móvil, logo completo en desktop -->
+                        <img src="IMG/Minilogo.png" alt="Escuelas de Campo" class="h-9 w-9 object-contain block md:hidden flex-shrink-0">
+                        <img src="IMG/Escuelas de campo_logo.png" alt="Escuelas de Campo" class="h-10 object-contain hidden md:block flex-shrink-0">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base sm:text-xl text-agro-dark leading-tight">Cosechando Soberanía</span>
+                            <span class="text-xs text-gray-500 uppercase tracking-wider hidden sm:block">Formación Agroecológica</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleInfo()" class="flex items-center gap-2 text-gray-600 hover:text-agro transition px-3 py-2 rounded-md text-sm font-medium">
+                        <i data-lucide="info" class="h-5 w-5"></i>
+                        <span class="hidden sm:inline">Lo que debes saber</span>
+                    </button>
+<a href="https://capacitacion.cosob.mx/" class="bg-agro text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-agro-dark transition flex items-center gap-2 shadow-sm">
+                        <i data-lucide="user-circle" class="h-5 w-5"></i>
+                        Acceder
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+            <div class="md:w-2/3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-sm mb-6 border border-white/30">
+                    <i data-lucide="star" class="h-4 w-4 text-agro-accent fill-agro-accent"></i>
+                    <span>¡Te damos la bienvenida a la plataforma!</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                    Impulsa la transición agroecológica
+                </h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-100 max-w-2xl leading-relaxed">
+                    Inscríbete y accede a cursos para técnicos, productores y promotores comunitarios. Contenidos disponibles 24/7 para tu desarrollo en el campo.
+                </p>
+                <button onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})" class="bg-agro-accent text-white font-bold px-8 py-4 rounded-lg text-lg hover:brightness-125 transition shadow-lg inline-flex items-center gap-2 hover:-translate-y-1 transform duration-200">
+                    Explorar Catálogo
+                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Logos institucionales -->
+        <div class="bg-white/95 backdrop-blur-sm border-t border-white/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
+                <img src="IMG/Gobierno de méxico logo.png" alt="Gobierno de México" class="h-8 sm:h-11 object-contain">
+                <div class="w-px h-8 bg-gray-300 hidden sm:block"></div>
+                <img src="IMG/SADER_logo.png" alt="Secretaría de Agricultura y Desarrollo Rural" class="h-8 sm:h-11 object-contain">
+                <div class="w-px h-8 bg-gray-300 hidden sm:block"></div>
+                <img src="IMG/Escuelas de campo_logo.png" alt="Escuelas de Campo" class="h-8 sm:h-11 object-contain">
+            </div>
+        </div>
+    </div>
+
+    <!-- Cursos Más Vistos (Destacados) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex items-center gap-3 mb-8 border-b pb-4">
+            <div class="bg-agro/10 p-2 rounded-lg text-agro">
+                <i data-lucide="trending-up" class="h-6 w-6"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800">Cursos más solicitados</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Módulo 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all group flex flex-col h-full">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1590682680695-43b964a3ae17?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Agroecología" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <div class="text-xs font-semibold text-agro-earth uppercase tracking-wider mb-2">Producción Sustentable</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Agroecología y Agricultura Integrada</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Técnicas agroecológicas integradas para diversificar y fortalecer tu parcela de forma natural y sostenible.</p>
+                    <a href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-gray-50 text-agro font-semibold border border-agro/20 py-2.5 rounded-lg hover:bg-agro hover:text-white transition flex justify-center items-center gap-2">
+                        <i data-lucide="plus-circle" class="h-5 w-5"></i> Inscribirme
+                    </a>
+                </div>
+            </div>
+
+            <!-- Módulo 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all group flex flex-col h-full">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cosecha" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <div class="text-xs font-semibold text-agro-earth uppercase tracking-wider mb-2">Manejo del Producto</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Cosecha, Postcosecha y Valor Agregado</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Aprende a conservar, procesar y transformar tus cosechas para generar mayor valor e incrementar tus ingresos.</p>
+                    <a href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-gray-50 text-agro font-semibold border border-agro/20 py-2.5 rounded-lg hover:bg-agro hover:text-white transition flex justify-center items-center gap-2">
+                        <i data-lucide="plus-circle" class="h-5 w-5"></i> Inscribirme
+                    </a>
+                </div>
+            </div>
+
+            <!-- Módulo 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all group flex flex-col h-full">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Comercialización" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <div class="text-xs font-semibold text-agro-earth uppercase tracking-wider mb-2">Mercados y Ventas</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Comercialización</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Estrategias prácticas para llevar tus productos al mercado, negociar mejores precios y crear canales de venta directos.</p>
+                    <a href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-gray-50 text-agro font-semibold border border-agro/20 py-2.5 rounded-lg hover:bg-agro hover:text-white transition flex justify-center items-center gap-2">
+                        <i data-lucide="plus-circle" class="h-5 w-5"></i> Inscribirme
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Catálogo por Ejes Temáticos -->
+    <div id="catalogo" class="bg-white border-y border-gray-200 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+                <div class="flex items-center gap-3">
+                    <div class="bg-agro/10 p-2 rounded-lg text-agro">
+                        <i data-lucide="layout-grid" class="h-6 w-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Catálogo de Módulos</h2>
+                        <p class="text-gray-500 text-sm mt-1">Explora todos los módulos disponibles en la plataforma.</p>
+                    </div>
+                </div>
+                <div class="relative w-full md:w-72">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5"></i>
+                    <input id="moduleSearch" type="text" placeholder="Buscar un módulo..." oninput="filterModules(this.value)" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-agro focus:border-agro outline-none transition">
+                </div>
+            </div>
+
+            <!-- Listado de Módulos -->
+            <div id="moduleCatalog" class="space-y-3">
+                <!-- Módulo 1 -->
+                <div data-module-idx="0" onclick="openModuleModal(0)" class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-md hover:border-agro/30 transition cursor-pointer">
+                    <div class="flex items-center gap-4 w-full md:w-2/3">
+                        <div class="bg-white p-3 rounded-lg shadow-sm text-agro">
+                            <i data-lucide="leaf" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Cosechando Soberanía</h4>
+                            <p class="text-sm text-gray-600 line-clamp-1">Fundamentos de la transición agroecológica y la autosuficiencia alimentaria.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full md:w-auto">
+                        <span class="text-sm font-semibold text-agro flex items-center gap-1">Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Módulo 2 -->
+                <div data-module-idx="1" onclick="openModuleModal(1)" class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-md hover:border-agro/30 transition cursor-pointer">
+                    <div class="flex items-center gap-4 w-full md:w-2/3">
+                        <div class="bg-white p-3 rounded-lg shadow-sm text-agro">
+                            <i data-lucide="tractor" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Escuelas de Campo</h4>
+                            <p class="text-sm text-gray-600 line-clamp-1">Aprendizaje práctico y experimental directamente en la parcela con otros productores.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full md:w-auto">
+                        <span class="text-sm font-semibold text-agro flex items-center gap-1">Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Módulo 3 -->
+                <div data-module-idx="2" onclick="openModuleModal(2)" class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-md hover:border-agro/30 transition cursor-pointer">
+                    <div class="flex items-center gap-4 w-full md:w-2/3">
+                        <div class="bg-white p-3 rounded-lg shadow-sm text-agro-earth">
+                            <i data-lucide="link" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Cadenas Productivas</h4>
+                            <p class="text-sm text-gray-600 line-clamp-1">Organización del proceso productivo desde el insumo hasta la entrega al consumidor.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full md:w-auto">
+                        <span class="text-sm font-semibold text-agro flex items-center gap-1">Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Módulo 4 -->
+                <div data-module-idx="3" onclick="openModuleModal(3)" class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-md hover:border-agro/30 transition cursor-pointer">
+                    <div class="flex items-center gap-4 w-full md:w-2/3">
+                        <div class="bg-white p-3 rounded-lg shadow-sm text-agro">
+                            <i data-lucide="sprout" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Agroecología y Agricultura Integrada</h4>
+                            <p class="text-sm text-gray-600 line-clamp-1">Técnicas de manejo integral del agroecosistema para producir de forma sustentable.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full md:w-auto">
+                        <span class="text-sm font-semibold text-agro flex items-center gap-1">Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Módulo 5 -->
+                <div data-module-idx="4" onclick="openModuleModal(4)" class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-md hover:border-agro/30 transition cursor-pointer">
+                    <div class="flex items-center gap-4 w-full md:w-2/3">
+                        <div class="bg-white p-3 rounded-lg shadow-sm text-agro-earth">
+                            <i data-lucide="wheat" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Cosecha, Postcosecha y Valor Agregado</h4>
+                            <p class="text-sm text-gray-600 line-clamp-1">Manejo, conservación y transformación del producto para incrementar su valor comercial.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full md:w-auto">
+                        <span class="text-sm font-semibold text-agro flex items-center gap-1">Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Módulo 6 -->
+                <div data-module-idx="5" onclick="openModuleModal(5)" class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-md hover:border-agro/30 transition cursor-pointer">
+                    <div class="flex items-center gap-4 w-full md:w-2/3">
+                        <div class="bg-white p-3 rounded-lg shadow-sm text-orange-600">
+                            <i data-lucide="store" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Comercialización</h4>
+                            <p class="text-sm text-gray-600 line-clamp-1">Canales de venta, precios justos y estrategias de mercado para el productor.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full md:w-auto">
+                        <span class="text-sm font-semibold text-agro flex items-center gap-1">Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Módulo 7 -->
+                <div data-module-idx="6" onclick="openModuleModal(6)" class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-md hover:border-agro/30 transition cursor-pointer">
+                    <div class="flex items-center gap-4 w-full md:w-2/3">
+                        <div class="bg-white p-3 rounded-lg shadow-sm text-blue-600">
+                            <i data-lucide="calculator" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Administración y Manejo Financiero</h4>
+                            <p class="text-sm text-gray-600 line-clamp-1">Contabilidad básica, presupuesto y gestión financiera para unidades productivas rurales.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full md:w-auto">
+                        <span class="text-sm font-semibold text-agro flex items-center gap-1">Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Módulo 8 -->
+                <div data-module-idx="7" onclick="openModuleModal(7)" class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 hover:shadow-md hover:border-agro/30 transition cursor-pointer">
+                    <div class="flex items-center gap-4 w-full md:w-2/3">
+                        <div class="bg-white p-3 rounded-lg shadow-sm text-agro-earth">
+                            <i data-lucide="users" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">Asociatividad</h4>
+                            <p class="text-sm text-gray-600 line-clamp-1">Formas de organización colectiva, cooperativas y redes de productores.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full md:w-auto">
+                        <span class="text-sm font-semibold text-agro flex items-center gap-1">Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Sin resultados -->
+                <div id="noResults" class="hidden text-center py-10 text-gray-400">
+                    <i data-lucide="search-x" class="h-10 w-10 mx-auto mb-3 opacity-40"></i>
+                    <p class="font-medium">No se encontró ningún módulo con ese nombre.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saberes Comunitarios (Equivalente a Habilidades de Poder) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex items-center gap-3 mb-8">
+            <div class="bg-agro-earth/10 p-2 rounded-lg text-agro-earth">
+                <i data-lucide="users" class="h-6 w-6"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">Gestión, Organización y Finanzas</h2>
+                <p class="text-gray-500 text-sm">Módulos para fortalecer la organización colectiva y la sostenibilidad financiera.</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card 1 -->
+            <div class="border border-gray-200 rounded-xl p-6 bg-white flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Asociatividad</h3>
+                    <p class="text-gray-600 text-sm mb-4">Formas de organización colectiva, cooperativas, redes de productores y mecanismos de toma de decisión participativa para fortalecer el tejido comunitario.</p>
+                </div>
+                <div class="flex justify-end items-center mt-4 pt-4 border-t border-gray-100">
+                    <a href="https://capacitacion.cosob.mx/" target="_blank" class="text-agro font-semibold text-sm hover:underline flex items-center gap-1">Explorar módulo <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="border border-gray-200 rounded-xl p-6 bg-white flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Administración y Manejo Financiero</h3>
+                    <p class="text-gray-600 text-sm mb-4">Herramientas de contabilidad básica, planeación financiera y gestión de recursos para que tu unidad productiva sea rentable y sostenible.</p>
+                </div>
+                <div class="flex justify-end items-center mt-4 pt-4 border-t border-gray-100">
+                    <a href="https://capacitacion.cosob.mx/" target="_blank" class="text-agro font-semibold text-sm hover:underline flex items-center gap-1">Explorar módulo <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Institucional -->
+    <footer class="text-gray-200 py-12 border-t-4 border-agro-accent" style="background-color: #9B2247;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4 text-white">
+                    <i data-lucide="leaf" class="h-6 w-6 text-agro-accent"></i>
+                    <span class="font-bold text-lg">Cosechando Soberanía</span>
+                </div>
+                <p class="text-sm text-red-100 mb-4">
+                    Plataforma por Desarrollo e Innovación en la SADER para promover la autosuficiencia alimentaria y el bienestar del campo.
+                </p>
+                <p class="text-sm text-red-200">© 2026 Derechos Reservados.</p>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Contacto y Soporte</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="map-pin" class="h-5 w-5 text-red-300 mt-0.5 flex-shrink-0"></i>
+                        <span>Av. Municipio Libre 377, Santa Cruz Atoyac, Benito Juárez, C.P. 03310, CDMX.</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i data-lucide="mail" class="h-5 w-5 text-red-300"></i>
+                        <a href="#" class="hover:text-white transition"><span class="__cf_email__" data-cfemail="1c797679716c707378795c7f736e6e7973327b737e327164">[email&#160;protected]</span></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Legal</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><button onclick="togglePrivacy()" class="hover:text-white transition underline">Aviso de Privacidad</button></li>
+                    <li><a href="#" class="hover:text-white transition">Términos y Condiciones</a></li>
+                    <li><a href="#" class="hover:text-white transition">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+
+    <!-- Modal: Lo que debes saber -->
+    <div id="infoModal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden my-auto">
+            <div class="p-4 sm:p-6 border-b border-gray-100 flex justify-between items-start">
+                <div>
+                    <h3 class="font-bold text-2xl text-gray-900">Lo que debes saber</h3>
+                    <p class="text-gray-500 text-sm mt-1">Información clave para aprovechar al máximo la plataforma.</p>
+                </div>
+                <button onclick="toggleInfo()" class="text-gray-400 hover:text-gray-700 ml-4 mt-1"><i data-lucide="x" class="h-6 w-6"></i></button>
+            </div>
+            <div class="p-4 sm:p-6 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                <div class="bg-gray-50 rounded-xl p-4 flex flex-col items-center text-center gap-3">
+                    <div class="bg-white rounded-full p-3 shadow-sm">
+                        <i data-lucide="clock" class="h-8 w-8 text-agro-earth"></i>
+                    </div>
+                    <p class="font-bold text-gray-800 text-sm">Acceso ilimitado</p>
+                    <p class="text-gray-500 text-xs">Cursos disponibles 24/7 desde cualquier dispositivo.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4 flex flex-col items-center text-center gap-3">
+                    <div class="bg-white rounded-full p-3 shadow-sm">
+                        <i data-lucide="graduation-cap" class="h-8 w-8 text-agro-earth"></i>
+                    </div>
+                    <p class="font-bold text-gray-800 text-sm">Contenido especializado</p>
+                    <p class="text-gray-500 text-xs">Materiales diseñados por expertos en agroecología y desarrollo rural.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4 flex flex-col items-center text-center gap-3">
+                    <div class="bg-white rounded-full p-3 shadow-sm">
+                        <i data-lucide="award" class="h-8 w-8 text-agro-earth"></i>
+                    </div>
+                    <p class="font-bold text-gray-800 text-sm">Constancia oficial</p>
+                    <p class="text-gray-500 text-xs">Obtén tu constancia al completar cada curso satisfactoriamente.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4 flex flex-col items-center text-center gap-3">
+                    <div class="bg-white rounded-full p-3 shadow-sm">
+                        <i data-lucide="users" class="h-8 w-8 text-agro-earth"></i>
+                    </div>
+                    <p class="font-bold text-gray-800 text-sm">Red comunitaria</p>
+                    <p class="text-gray-500 text-xs">Conecta con productores y técnicos de toda la región.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Acceso / Registro -->
+    <div id="loginModal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all">
+            <div class="bg-agro p-4 flex justify-between items-center text-white">
+                <h3 class="font-bold text-lg">Acceso a la Plataforma</h3>
+                <button onclick="toggleLogin()" class="text-white/80 hover:text-white"><i data-lucide="x" class="h-6 w-6"></i></button>
+            </div>
+            <div class="p-6">
+                <div class="text-center mb-6">
+                    <p class="text-sm text-gray-600">Si eres técnico agroecológico, productor o becario, ingresa tus datos para continuar.</p>
+                </div>
+                <form onsubmit="event.preventDefault(); alert('En un entorno real, esto validaría la CURP.'); toggleLogin();">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">CURP o Matrícula de Productor</label>
+                        <input type="text" placeholder="Ej. ABCD123456EFGHIJ78" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-agro focus:border-agro outline-none uppercase font-mono tracking-widest text-sm">
+                    </div>
+                    <button type="submit" class="w-full bg-agro text-white font-bold py-3 rounded-lg hover:bg-agro-dark transition flex justify-center items-center gap-2">
+                        <i data-lucide="search" class="h-5 w-5"></i> Buscar Registro
+                    </button>
+                </form>
+                <div class="mt-4 text-center">
+                    <p class="text-xs text-gray-500">¿Es tu primera vez? <a href="#" class="text-agro font-bold hover:underline">Solicita tu pre-registro aquí</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal: Aviso de Privacidad -->
+    <div id="privacyModal" class="fixed inset-0 bg-black/50 z-[70] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h3 class="font-bold text-lg text-gray-800">Aviso de Privacidad Simplificado</h3>
+                <button onclick="togglePrivacy()" class="text-gray-500 hover:text-red-500"><i data-lucide="x" class="h-6 w-6"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto text-sm text-gray-600 space-y-4">
+                <p>El programa "Cosechando Soberanía", es responsable del tratamiento de los datos personales que nos proporcione, los cuales serán protegidos conforme a lo dispuesto por la Ley General de Protección de Datos Personales.</p>
+                <h4 class="font-bold text-gray-800">Finalidades del tratamiento</h4>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Requisitar su inscripción a los cursos agroecológicos.</li>
+                    <li>Generar reportes estadísticos para el diseño de políticas públicas agrarias.</li>
+                </ul>
+                <p>Se informa que no se recabarán datos personales sensibles y no se realizarán transferencias de datos a terceros ajenos a la dependencia sin su consentimiento explícito.</p>
+            </div>
+            <div class="p-4 border-t bg-gray-50 text-right">
+                <button onclick="togglePrivacy()" class="bg-agro text-white px-6 py-2 rounded-lg font-bold hover:bg-agro-dark">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Detalle de Módulo -->
+    <div id="moduleModal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="if(event.target===this) closeModuleModal()">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="bg-agro-light border-b border-agro/20 p-5 flex justify-between items-start gap-4">
+                <div class="flex items-center gap-3">
+                    <div id="moduleModalIcon" class="bg-white p-3 rounded-xl shadow-sm text-agro">
+                        <i id="moduleModalIconEl" data-lucide="leaf" class="h-7 w-7"></i>
+                    </div>
+                    <h3 id="moduleModalTitle" class="font-bold text-xl text-agro-dark leading-snug"></h3>
+                </div>
+                <button onclick="closeModuleModal()" class="text-gray-400 hover:text-gray-700 flex-shrink-0 mt-0.5"><i data-lucide="x" class="h-6 w-6"></i></button>
+            </div>
+            <div class="p-6">
+                <p id="moduleModalDesc" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
+                <a href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-agro text-white font-bold py-3 rounded-lg hover:bg-agro-dark transition flex justify-center items-center gap-2">
+                    Inscribirme a este módulo <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón Flotante Asistente Agroecológico -->
+    <button onclick="toggleAssistant()" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-agro-accent text-white p-3 md:p-4 rounded-full shadow-2xl hover:brightness-125 transition transform hover:scale-105 z-50 flex items-center gap-2 border-2 border-white">
+        <i data-lucide="sparkles" class="h-6 w-6"></i>
+        <span class="font-bold hidden md:inline">Guía Agroecológico</span>
+    </button>
+
+    <!-- Panel del Asistente Agroecológico -->
+    <div id="assistantModal" class="fixed inset-y-0 right-0 w-full sm:w-[400px] bg-white shadow-2xl z-[80] transform translate-x-full transition-transform duration-300 flex flex-col border-l border-gray-200">
+        <div class="bg-agro p-4 flex justify-between items-center text-white shadow-md">
+            <div class="flex items-center gap-2">
+                <i data-lucide="bot" class="h-6 w-6"></i>
+                <h3 class="font-bold text-lg">Guía Agroecológico ✨</h3>
+            </div>
+            <button onclick="toggleAssistant()" class="text-white/80 hover:text-white"><i data-lucide="x" class="h-6 w-6"></i></button>
+        </div>
+        
+        <div id="chatHistory" class="flex-grow p-4 overflow-y-auto bg-gray-50 flex flex-col gap-4 text-sm scroll-smooth">
+            <div class="bg-white p-3 rounded-tr-lg rounded-b-lg border border-gray-200 self-start max-w-[85%] shadow-sm text-gray-700">
+                ¡Qué tal, Productor agroecológico! 🌱 Dime qué estás cultivando o qué problema tienes en tu parcela y te digo directo qué curso te cae como anillo al dedo.
+            </div>
+        </div>
+        
+        <div class="p-4 bg-white border-t border-gray-200">
+            <div class="flex gap-2">
+                <input type="text" id="chatInput" placeholder="Ej. Tengo pulgón en mi milpa..." class="flex-grow px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-agro focus:border-agro outline-none" onkeypress="if(event.key === 'Enter') sendMessage()">
+                <button onclick="sendMessage()" class="bg-agro text-white p-2.5 rounded-full hover:bg-agro-dark transition flex-shrink-0">
+                    <i data-lucide="send" class="h-5 w-5"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Inicializar iconos
+        lucide.createIcons();
+
+        function toggleInfo() {
+            const modal = document.getElementById('infoModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function toggleLogin() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function togglePrivacy() {
+            const modal = document.getElementById('privacyModal');
+            modal.classList.toggle('hidden');
+        }
+
+// --- Catálogo de Módulos ---
+        const modulesData = [
+            {
+                name: 'Cosechando Soberanía',
+                icon: 'leaf',
+                iconColor: 'text-agro',
+                desc: 'Este módulo introduce los principios fundacionales del programa: soberanía alimentaria, transición agroecológica y el papel del productor como agente de cambio. Aprenderás qué significa producir de forma autónoma, diversificada y en armonía con el territorio, construyendo las bases para una autosuficiencia real y duradera en tu comunidad.'
+            },
+            {
+                name: 'Escuelas de Campo',
+                icon: 'tractor',
+                iconColor: 'text-agro',
+                desc: 'Las Escuelas de Campo (ECA) son espacios de aprendizaje colectivo donde los propios productores son protagonistas. Mediante ciclos de observación, experimentación y análisis directamente en la parcela, este módulo te enseña a identificar problemas, proponer soluciones y compartir saberes con otros productores de tu región.'
+            },
+            {
+                name: 'Cadenas Productivas',
+                icon: 'link',
+                iconColor: 'text-agro-earth',
+                desc: 'Aprende a identificar y optimizar cada eslabón del proceso productivo: desde la obtención de insumos hasta la entrega del producto al consumidor final. Este módulo te ayuda a articularte con otros actores de la cadena, reducir intermediarios y fortalecer tu posición como productor organizado dentro del sistema agroalimentario.'
+            },
+            {
+                name: 'Agroecología y Agricultura Integrada',
+                icon: 'sprout',
+                iconColor: 'text-agro',
+                desc: 'Combina conocimientos tradicionales con prácticas agroecológicas modernas: control biológico de plagas, elaboración de bioinsumos, diversificación de cultivos y manejo del suelo vivo. Este módulo te brinda las herramientas técnicas para manejar tu agroecosistema de forma integral, reduciendo costos y dependencia de insumos externos.'
+            },
+            {
+                name: 'Cosecha, Postcosecha y Valor Agregado',
+                icon: 'wheat',
+                iconColor: 'text-agro-earth',
+                desc: 'Aprende técnicas de inocuidad, almacenamiento, procesamiento básico y presentación de productos para incrementar su valor comercial. Este módulo te muestra cómo conservar la calidad de tus cosechas, transformarlas en productos con mayor precio de venta y presentarlas de forma atractiva en mercados locales y regionales.'
+            },
+            {
+                name: 'Comercialización',
+                icon: 'store',
+                iconColor: 'text-orange-600',
+                desc: 'Aprende a identificar tus compradores potenciales, negociar precios justos y construir canales de venta directos. Este módulo aborda estrategias de mercado adaptadas al productor rural: ferias, mercados locales, circuitos cortos, venta en línea y acuerdos con compradores institucionales.'
+            },
+            {
+                name: 'Administración y Manejo Financiero',
+                icon: 'calculator',
+                iconColor: 'text-blue-600',
+                desc: 'Domina herramientas prácticas de contabilidad básica, registro de costos, elaboración de presupuestos y análisis de rentabilidad. Este módulo está diseñado para unidades productivas rurales: aprenderás a tomar decisiones financieras informadas y a planificar el crecimiento sostenible de tu negocio agropecuario.'
+            },
+            {
+                name: 'Asociatividad',
+                icon: 'users',
+                iconColor: 'text-agro-earth',
+                desc: 'Conoce las distintas formas de organización colectiva disponibles para los productores: cooperativas, sociedades de producción rural, redes de productores y figuras asociativas. Este módulo te proporciona los fundamentos legales, organizativos y prácticos para constituir y operar colectivos que fortalezcan el tejido comunitario y mejoren tu poder de negociación.'
+            }
+        ];
+
+        function filterModules(query) {
+            const q = query.toLowerCase().trim();
+            const rows = document.querySelectorAll('#moduleCatalog [data-module-idx]');
+            let visible = 0;
+            rows.forEach(row => {
+                const name = row.querySelector('h4').textContent.toLowerCase();
+                const match = q === '' || name.includes(q);
+                row.style.display = match ? '' : 'none';
+                if (match) visible++;
+            });
+            document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+        }
+
+        function openModuleModal(idx) {
+            const m = modulesData[idx];
+            document.getElementById('moduleModalTitle').textContent = m.name;
+            document.getElementById('moduleModalDesc').textContent = m.desc;
+            const iconEl = document.getElementById('moduleModalIconEl');
+            iconEl.setAttribute('data-lucide', m.icon);
+            // Quitar clases de color previas y aplicar la nueva
+            const iconWrap = document.getElementById('moduleModalIcon');
+            iconWrap.className = 'bg-white p-3 rounded-xl shadow-sm ' + m.iconColor;
+            lucide.createIcons({ nodes: [iconEl] });
+            document.getElementById('moduleModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModuleModal() {
+            document.getElementById('moduleModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+// --- Integración Gemini API ---
+        const apiKey = "AIzaSyDetYTMvQKykfl4xvoEtlwQ-NoSeQpl3ns"; // La plataforma inyectará la clave automáticamente
+        const systemPrompt = `Eres un asesor de cursos de la plataforma "Cosechando Soberanía". Tu único trabajo es escuchar el problema o interés del Productor agroecológico y recomendarle de inmediato el curso más adecuado del catálogo.
+
+        Módulos disponibles:
+        1. Cosechando Soberanía
+        2. Escuelas de Campo
+        3. Cadenas Productivas
+        4. Agroecología y Agricultura Integrada
+        5. Cosecha, Postcosecha y Valor Agregado
+        6. Comercialización
+        7. Administración y Manejo Financiero
+        8. Asociatividad
+
+        Instrucciones de tono y estilo:
+        - Llama siempre al usuario "Productor agroecológico".
+        - Habla de forma amigable y directa, como si fuera una plática entre amigos. Sin rodeos ni formalismos, pero sin groserías.
+        - Ve directo a la recomendación: no hagas preguntas de seguimiento innecesarias ni des introducción larga.
+        - Si el problema no encaja con ningún curso, recomienda el más cercano y explica brevemente por qué.
+        - Respuestas cortas: máximo 3 párrafos.
+        - Usa negritas en Markdown para resaltar el nombre del curso recomendado.
+        - Usa emojis del campo con moderación 🌽🌱.`;
+
+        function toggleAssistant() {
+            const panel = document.getElementById('assistantModal');
+            if (panel.classList.contains('translate-x-full')) {
+                panel.classList.remove('translate-x-full');
+            } else {
+                panel.classList.add('translate-x-full');
+            }
+        }
+
+        async function fetchGeminiWithRetry(prompt, retries = 5) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            const delays = [1000, 2000, 4000, 8000, 16000];
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const data = await response.json();
+                    return data.candidates[0].content.parts[0].text;
+                } catch (e) {
+                    console.error(e);
+                    if (i === retries - 1) return "Lo siento. Mi conexión falló. Verifica tu conexión e intenta de nuevo más tarde.";
+                    await new Promise(res => setTimeout(res, delays[i]));
+                }
+            }
+        }
+
+        function addChatMessage(text, sender, isLoader = false) {
+            const history = document.getElementById('chatHistory');
+            const msgDiv = document.createElement('div');
+            // Se agregó un número aleatorio para garantizar que el ID sea único y no sobreescriba mensajes
+            const id = 'msg-' + Date.now() + '-' + Math.floor(Math.random() * 10000);
+            msgDiv.id = id;
+            
+            if (sender === 'user') {
+                msgDiv.className = 'bg-agro text-white p-3 rounded-tl-lg rounded-b-lg self-end max-w-[85%] shadow-sm';
+                msgDiv.textContent = text;
+            } else {
+                msgDiv.className = 'bg-white text-gray-700 p-3 rounded-tr-lg rounded-b-lg border border-gray-200 self-start max-w-[85%] shadow-sm';
+                if (isLoader) {
+                    msgDiv.innerHTML = '<div class="flex items-center gap-2"><i data-lucide="loader-2" class="h-4 w-4 animate-spin text-agro"></i> <span class="text-gray-500 italic">Consultando la milpa...</span></div>';
+                } else {
+                    // Renderizamos el markdown
+                    msgDiv.innerHTML = marked.parse(text);
+                    // Ajustes rápidos de espaciado para las respuestas generadas
+                    const paragraphs = msgDiv.querySelectorAll('p');
+                    paragraphs.forEach(p => p.classList.add('mb-2', 'last:mb-0'));
+                }
+            }
+            
+            history.appendChild(msgDiv);
+            history.scrollTop = history.scrollHeight;
+            if (isLoader) lucide.createIcons();
+            return id;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            // Mostrar mensaje del usuario
+            addChatMessage(text, 'user');
+            input.value = '';
+
+            // Mostrar indicador de carga
+            const loadingId = addChatMessage("", 'bot', true);
+
+            // Llamar a la API de Gemini
+            const reply = await fetchGeminiWithRetry(text);
+
+            // Reemplazar estado de carga con la respuesta real
+            const loaderElement = document.getElementById(loadingId);
+            loaderElement.innerHTML = marked.parse(reply);
+            
+            // Ajustar el espaciado interno de la respuesta markdown
+            const paragraphs = loaderElement.querySelectorAll('p');
+            paragraphs.forEach(p => p.classList.add('mb-2', 'last:mb-0'));
+            const lists = loaderElement.querySelectorAll('ul');
+            lists.forEach(ul => ul.classList.add('list-disc', 'pl-4', 'mb-2'));
+            
+        }
+    </script>
+</body>
+</html>
