@@ -656,7 +656,6 @@
         }
 
 // --- Integración Gemini API ---
-        const apiKey = "AIzaSyDetYTMvQKykfl4xvoEtlwQ-NoSeQpl3ns"; // La plataforma inyectará la clave automáticamente
         const systemPrompt = `Eres un asesor de cursos de la plataforma "Cosechando Soberanía". Tu único trabajo es escuchar el problema o interés del Productor agroecológico y recomendarle de inmediato el curso más adecuado del catálogo.
 
         Módulos disponibles:
@@ -688,7 +687,7 @@
         }
 
         async function fetchGeminiWithRetry(prompt, retries = 5) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+            const url = `/.netlify/functions/gemini`;
             const payload = {
                 contents: [{ parts: [{ text: prompt }] }],
                 systemInstruction: { parts: [{ text: systemPrompt }] }
