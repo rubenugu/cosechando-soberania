@@ -552,7 +552,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Inicializar iconos
         lucide.createIcons();
 
@@ -705,7 +705,9 @@
                     });
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     const data = await response.json();
-                    return data.candidates[0].content.parts[0].text;
+                    const parts = data.candidates[0].content.parts;
+                    const textPart = parts.find(p => !p.thought && p.text);
+                    return textPart ? textPart.text : parts[0].text;
                 } catch (e) {
                     console.error(e);
                     if (i === retries - 1) return "Lo siento. Mi conexión falló. Verifica tu conexión e intenta de nuevo más tarde.";
