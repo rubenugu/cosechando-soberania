@@ -96,7 +96,7 @@
                 <p class="text-lg md:text-xl mb-8 text-gray-100 max-w-2xl leading-relaxed">
                     Inscríbete y accede a cursos para técnicos, productores y promotores comunitarios. Contenidos disponibles 24/7 para tu desarrollo en el campo.
                 </p>
-                <button onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})" class="bg-agro-accent text-white font-bold px-8 py-4 rounded-lg text-lg hover:brightness-125 transition shadow-lg inline-flex items-center gap-2 hover:-translate-y-1 transform duration-200">
+                <button onclick="const el=document.getElementById('catalogo');window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'})" class="bg-agro-accent text-white font-bold px-8 py-4 rounded-lg text-lg hover:brightness-125 transition shadow-lg inline-flex items-center gap-2 hover:-translate-y-1 transform duration-200">
                     Explorar Catálogo
                     <i data-lucide="arrow-right" class="h-5 w-5"></i>
                 </button>
@@ -133,7 +133,7 @@
                     <div class="text-xs font-semibold text-agro-earth uppercase tracking-wider mb-2">Producción Sustentable</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Agroecología y Agricultura Integrada</h3>
                     <p class="text-gray-600 text-sm mb-4 flex-grow">Técnicas agroecológicas integradas para diversificar y fortalecer tu parcela de forma natural y sostenible.</p>
-                    <a href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-gray-50 text-agro font-semibold border border-agro/20 py-2.5 rounded-lg hover:bg-agro hover:text-white transition flex justify-center items-center gap-2">
+                    <a href="https://capacitacion.cosob.mx/mod/scorm/view.php?id=43" target="_blank" class="w-full bg-gray-50 text-agro font-semibold border border-agro/20 py-2.5 rounded-lg hover:bg-agro hover:text-white transition flex justify-center items-center gap-2">
                         <i data-lucide="plus-circle" class="h-5 w-5"></i> Inscribirme
                     </a>
                 </div>
@@ -513,7 +513,7 @@
             </div>
             <div class="p-6">
                 <p id="moduleModalDesc" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
-                <a href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-agro text-white font-bold py-3 rounded-lg hover:bg-agro-dark transition flex justify-center items-center gap-2">
+                <a id="moduleModalLink" href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-agro text-white font-bold py-3 rounded-lg hover:bg-agro-dark transition flex justify-center items-center gap-2">
                     Inscribirme a este módulo <i data-lucide="arrow-right" class="h-5 w-5"></i>
                 </a>
             </div>
@@ -595,7 +595,8 @@
                 name: 'Agroecología y Agricultura Integrada',
                 icon: 'sprout',
                 iconColor: 'text-agro',
-                desc: 'Combina conocimientos tradicionales con prácticas agroecológicas modernas: control biológico de plagas, elaboración de bioinsumos, diversificación de cultivos y manejo del suelo vivo. Este módulo te brinda las herramientas técnicas para manejar tu agroecosistema de forma integral, reduciendo costos y dependencia de insumos externos.'
+                desc: 'Combina conocimientos tradicionales con prácticas agroecológicas modernas: control biológico de plagas, elaboración de bioinsumos, diversificación de cultivos y manejo del suelo vivo. Este módulo te brinda las herramientas técnicas para manejar tu agroecosistema de forma integral, reduciendo costos y dependencia de insumos externos.',
+                url: 'https://capacitacion.cosob.mx/mod/scorm/view.php?id=43'
             },
             {
                 name: 'Cosecha, Postcosecha y Valor Agregado',
@@ -646,6 +647,7 @@
             const iconWrap = document.getElementById('moduleModalIcon');
             iconWrap.className = 'bg-white p-3 rounded-xl shadow-sm ' + m.iconColor;
             lucide.createIcons({ nodes: [iconEl] });
+            document.getElementById('moduleModalLink').href = m.url || 'https://capacitacion.cosob.mx/';
             document.getElementById('moduleModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
