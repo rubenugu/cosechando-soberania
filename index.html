@@ -37,8 +37,15 @@
             background-position: center;
             background-attachment: fixed;
         }
+        .hero-bg-tecnico {
+            background-image: linear-gradient(rgba(10, 35, 28, 0.68), rgba(14, 50, 40, 0.60)), url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
         @media (max-width: 768px) {
             .hero-bg { background-attachment: scroll; }
+            .hero-bg-tecnico { background-attachment: scroll; }
         }
         /* Ocultar scrollbar pero permitir scroll */
         .no-scrollbar::-webkit-scrollbar {
@@ -82,25 +89,53 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="hero-bg text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-            <div class="md:w-2/3">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-sm mb-6 border border-white/30">
-                    <i data-lucide="star" class="h-4 w-4 text-agro-accent fill-agro-accent"></i>
-                    <span>¡Te damos la bienvenida a la plataforma!</span>
+    <!-- Hero Section — Dividido en dos paneles -->
+    <div class="text-white">
+        <div class="flex flex-col md:flex-row">
+
+            <!-- Panel 1: Usuarios generales -->
+            <div class="hero-bg flex-1 flex items-center min-h-[440px] md:min-h-[540px]">
+                <div class="px-8 md:px-12 lg:px-16 py-20 md:py-28 w-full">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-sm mb-6 border border-white/30">
+                        <i data-lucide="book-open" class="h-4 w-4 text-agro-accent"></i>
+                        <span>Acceso libre al catálogo</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
+                        Explora nuestra formación agroecológica
+                    </h1>
+                    <p class="text-base md:text-lg mb-8 text-gray-100 max-w-md leading-relaxed">
+                        Consulta libremente todos nuestros módulos e información del programa. Sin registro, sin evaluaciones, a tu propio ritmo.
+                    </p>
+                    <button onclick="const el=document.getElementById('catalogo');window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'})" class="bg-agro-accent text-white font-bold px-8 py-4 rounded-lg text-lg hover:brightness-125 transition shadow-lg inline-flex items-center gap-2 hover:-translate-y-1 transform duration-200">
+                        Explorar Catálogo
+                        <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                    </button>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-                    Impulsa la transición agroecológica
-                </h1>
-                <p class="text-lg md:text-xl mb-8 text-gray-100 max-w-2xl leading-relaxed">
-                    Inscríbete y accede a cursos para técnicos, productores y promotores comunitarios. Contenidos disponibles 24/7 para tu desarrollo en el campo.
-                </p>
-                <button onclick="const el=document.getElementById('catalogo');window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'})" class="bg-agro-accent text-white font-bold px-8 py-4 rounded-lg text-lg hover:brightness-125 transition shadow-lg inline-flex items-center gap-2 hover:-translate-y-1 transform duration-200">
-                    Explorar Catálogo
-                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
-                </button>
             </div>
+
+            <!-- Divisor vertical (solo desktop) -->
+            <div class="hidden md:block w-0.5 bg-white/25 flex-shrink-0"></div>
+
+            <!-- Panel 2: Técnicos del Programa -->
+            <div class="hero-bg-tecnico flex-1 flex items-center min-h-[440px] md:min-h-[540px]">
+                <div class="px-8 md:px-12 lg:px-16 py-20 md:py-28 w-full">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-sm mb-6 border border-white/30">
+                        <i data-lucide="user-check" class="h-4 w-4 text-agro-accent"></i>
+                        <span>Programa de Transición Agroecológica</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
+                        Técnicos del Programa
+                    </h1>
+                    <p class="text-base md:text-lg mb-8 text-gray-100 max-w-md leading-relaxed">
+                        Accede a tus cursos, evaluaciones y seguimiento de avance. Plataforma exclusiva para técnicos acreditados del programa.
+                    </p>
+                    <a href="https://capacitacion.cosob.mx/" target="_blank" class="bg-white text-agro-dark font-bold px-8 py-4 rounded-lg text-lg hover:bg-agro-light transition shadow-lg inline-flex items-center gap-2 hover:-translate-y-1 transform duration-200">
+                        Acceder a la plataforma
+                        <i data-lucide="log-in" class="h-5 w-5"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
         <!-- Logos institucionales -->
         <div class="bg-white/95 backdrop-blur-sm border-t border-white/20">
@@ -133,9 +168,9 @@
                     <div class="text-xs font-semibold text-agro-earth uppercase tracking-wider mb-2">Producción Sustentable</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Agroecología y Agricultura Integrada</h3>
                     <p class="text-gray-600 text-sm mb-4 flex-grow">Técnicas agroecológicas integradas para diversificar y fortalecer tu parcela de forma natural y sostenible.</p>
-                    <a href="https://capacitacion.cosob.mx/mod/scorm/view.php?id=43" target="_blank" class="w-full bg-gray-50 text-agro font-semibold border border-agro/20 py-2.5 rounded-lg hover:bg-agro hover:text-white transition flex justify-center items-center gap-2">
-                        <i data-lucide="plus-circle" class="h-5 w-5"></i> Inscribirme
-                    </a>
+                    <button onclick="openModuleModal(3)" class="w-full text-sm font-semibold text-agro flex items-center justify-center gap-1 py-2.5 rounded-lg border border-agro/20 hover:bg-agro/5 transition">
+                        Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
                 </div>
             </div>
 
@@ -148,9 +183,9 @@
                     <div class="text-xs font-semibold text-agro-earth uppercase tracking-wider mb-2">Manejo del Producto</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Cosecha, Postcosecha y Valor Agregado</h3>
                     <p class="text-gray-600 text-sm mb-4 flex-grow">Aprende a conservar, procesar y transformar tus cosechas para generar mayor valor e incrementar tus ingresos.</p>
-                    <a href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-gray-50 text-agro font-semibold border border-agro/20 py-2.5 rounded-lg hover:bg-agro hover:text-white transition flex justify-center items-center gap-2">
-                        <i data-lucide="plus-circle" class="h-5 w-5"></i> Inscribirme
-                    </a>
+                    <button onclick="openModuleModal(4)" class="w-full text-sm font-semibold text-agro flex items-center justify-center gap-1 py-2.5 rounded-lg border border-agro/20 hover:bg-agro/5 transition">
+                        Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
                 </div>
             </div>
 
@@ -163,9 +198,9 @@
                     <div class="text-xs font-semibold text-agro-earth uppercase tracking-wider mb-2">Mercados y Ventas</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Comercialización</h3>
                     <p class="text-gray-600 text-sm mb-4 flex-grow">Estrategias prácticas para llevar tus productos al mercado, negociar mejores precios y crear canales de venta directos.</p>
-                    <a href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-gray-50 text-agro font-semibold border border-agro/20 py-2.5 rounded-lg hover:bg-agro hover:text-white transition flex justify-center items-center gap-2">
-                        <i data-lucide="plus-circle" class="h-5 w-5"></i> Inscribirme
-                    </a>
+                    <button onclick="openModuleModal(5)" class="w-full text-sm font-semibold text-agro flex items-center justify-center gap-1 py-2.5 rounded-lg border border-agro/20 hover:bg-agro/5 transition">
+                        Ver detalle <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -501,8 +536,8 @@
 
     <!-- Modal: Detalle de Módulo -->
     <div id="moduleModal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="if(event.target===this) closeModuleModal()">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
-            <div class="bg-agro-light border-b border-agro/20 p-5 flex justify-between items-start gap-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden max-h-[90vh] flex flex-col">
+            <div class="bg-agro-light border-b border-agro/20 p-5 flex justify-between items-start gap-4 flex-shrink-0">
                 <div class="flex items-center gap-3">
                     <div id="moduleModalIcon" class="bg-white p-3 rounded-xl shadow-sm text-agro">
                         <i id="moduleModalIconEl" data-lucide="leaf" class="h-7 w-7"></i>
@@ -511,10 +546,15 @@
                 </div>
                 <button onclick="closeModuleModal()" class="text-gray-400 hover:text-gray-700 flex-shrink-0 mt-0.5"><i data-lucide="x" class="h-6 w-6"></i></button>
             </div>
-            <div class="p-6">
+            <div class="p-6 overflow-y-auto flex-1">
                 <p id="moduleModalDesc" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
+                <!-- Acordeón de secciones (se muestra solo si el módulo tiene sections) -->
+                <div id="moduleModalVideos" class="hidden mb-6">
+                    <div id="moduleModalVideoList" class="flex flex-col gap-2"></div>
+                </div>
+                <p class="text-xs text-gray-400 text-center mb-2">¿Eres Técnico del programa?</p>
                 <a id="moduleModalLink" href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-agro text-white font-bold py-3 rounded-lg hover:bg-agro-dark transition flex justify-center items-center gap-2">
-                    Inscribirme a este módulo <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                    <i data-lucide="log-in" class="h-5 w-5"></i> Ingresar a la plataforma
                 </a>
             </div>
         </div>
@@ -596,7 +636,21 @@
                 icon: 'sprout',
                 iconColor: 'text-agro',
                 desc: 'Combina conocimientos tradicionales con prácticas agroecológicas modernas: control biológico de plagas, elaboración de bioinsumos, diversificación de cultivos y manejo del suelo vivo. Este módulo te brinda las herramientas técnicas para manejar tu agroecosistema de forma integral, reduciendo costos y dependencia de insumos externos.',
-                url: 'https://capacitacion.cosob.mx/mod/scorm/view.php?id=43'
+                url: 'https://capacitacion.cosob.mx/mod/scorm/view.php?id=43',
+                sections: [
+                    {
+                        title: 'Selección de semillas',
+                        videos: []
+                    },
+                    {
+                        title: 'Nutrición vegetal',
+                        videos: [
+                            'https://player.vimeo.com/video/493608397',
+                            'https://player.vimeo.com/video/493608764',
+                            'https://player.vimeo.com/video/493608899'
+                        ]
+                    }
+                ]
             },
             {
                 name: 'Cosecha, Postcosecha y Valor Agregado',
@@ -648,6 +702,41 @@
             iconWrap.className = 'bg-white p-3 rounded-xl shadow-sm ' + m.iconColor;
             lucide.createIcons({ nodes: [iconEl] });
             document.getElementById('moduleModalLink').href = m.url || 'https://capacitacion.cosob.mx/';
+
+            // Renderizar acordeón de secciones si el módulo las tiene
+            const videosSection = document.getElementById('moduleModalVideos');
+            const videoList = document.getElementById('moduleModalVideoList');
+            if (m.sections && m.sections.length > 0) {
+                videoList.innerHTML = m.sections.map(section => `
+                    <div class="border border-gray-200 rounded-xl overflow-hidden">
+                        <button
+                            onclick="const body=this.nextElementSibling; body.classList.toggle('hidden'); this.querySelector('.chev').classList.toggle('rotate-180');"
+                            class="w-full flex justify-between items-center px-4 py-3 bg-agro-light/70 hover:bg-agro-light transition text-left gap-2">
+                            <span class="font-semibold text-agro-dark text-sm">${section.title}</span>
+                            <svg class="chev h-4 w-4 text-agro flex-shrink-0 transition-transform duration-200"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="hidden">
+                            ${section.videos && section.videos.length > 0
+                                ? `<div class="p-4 space-y-3">` + section.videos.map(url => `
+                                    <div class="aspect-video w-full rounded-xl overflow-hidden bg-black shadow-sm">
+                                        <iframe src="${url}" width="100%" height="100%" frameborder="0"
+                                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                    </div>`).join('') + `</div>`
+                                : `<p class="px-4 py-3 text-sm text-gray-400 italic">Contenido disponible próximamente.</p>`
+                            }
+                        </div>
+                    </div>
+                `).join('');
+                videosSection.classList.remove('hidden');
+            } else {
+                videoList.innerHTML = '';
+                videosSection.classList.add('hidden');
+            }
+
             document.getElementById('moduleModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
