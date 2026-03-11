@@ -536,8 +536,8 @@
 
     <!-- Modal: Detalle de Módulo -->
     <div id="moduleModal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="if(event.target===this) closeModuleModal()">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
-            <div class="bg-agro-light border-b border-agro/20 p-5 flex justify-between items-start gap-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden max-h-[90vh] flex flex-col">
+            <div class="bg-agro-light border-b border-agro/20 p-5 flex justify-between items-start gap-4 flex-shrink-0">
                 <div class="flex items-center gap-3">
                     <div id="moduleModalIcon" class="bg-white p-3 rounded-xl shadow-sm text-agro">
                         <i id="moduleModalIconEl" data-lucide="leaf" class="h-7 w-7"></i>
@@ -546,8 +546,16 @@
                 </div>
                 <button onclick="closeModuleModal()" class="text-gray-400 hover:text-gray-700 flex-shrink-0 mt-0.5"><i data-lucide="x" class="h-6 w-6"></i></button>
             </div>
-            <div class="p-6">
+            <div class="p-6 overflow-y-auto flex-1">
                 <p id="moduleModalDesc" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
+                <!-- Sección de videos (se muestra solo si el módulo tiene videos) -->
+                <div id="moduleModalVideos" class="hidden mb-6">
+                    <h4 class="font-semibold text-agro-dark text-sm mb-3 flex items-center gap-2">
+                        <i data-lucide="play-circle" class="h-4 w-4"></i>
+                        Materiales de apoyo
+                    </h4>
+                    <div id="moduleModalVideoList" class="flex flex-col gap-4"></div>
+                </div>
                 <a id="moduleModalLink" href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-agro text-white font-bold py-3 rounded-lg hover:bg-agro-dark transition flex justify-center items-center gap-2">
                     Inscribirme a este módulo <i data-lucide="arrow-right" class="h-5 w-5"></i>
                 </a>
@@ -631,7 +639,12 @@
                 icon: 'sprout',
                 iconColor: 'text-agro',
                 desc: 'Combina conocimientos tradicionales con prácticas agroecológicas modernas: control biológico de plagas, elaboración de bioinsumos, diversificación de cultivos y manejo del suelo vivo. Este módulo te brinda las herramientas técnicas para manejar tu agroecosistema de forma integral, reduciendo costos y dependencia de insumos externos.',
-                url: 'https://capacitacion.cosob.mx/mod/scorm/view.php?id=43'
+                url: 'https://capacitacion.cosob.mx/mod/scorm/view.php?id=43',
+                videos: [
+                    'https://player.vimeo.com/video/493608397',
+                    'https://player.vimeo.com/video/493608764',
+                    'https://player.vimeo.com/video/493608899'
+                ]
             },
             {
                 name: 'Cosecha, Postcosecha y Valor Agregado',
@@ -683,6 +696,23 @@
             iconWrap.className = 'bg-white p-3 rounded-xl shadow-sm ' + m.iconColor;
             lucide.createIcons({ nodes: [iconEl] });
             document.getElementById('moduleModalLink').href = m.url || 'https://capacitacion.cosob.mx/';
+
+            // Renderizar videos si el módulo los tiene
+            const videosSection = document.getElementById('moduleModalVideos');
+            const videoList = document.getElementById('moduleModalVideoList');
+            if (m.videos && m.videos.length > 0) {
+                videoList.innerHTML = m.videos.map(url => `
+                    <div class="aspect-video w-full rounded-xl overflow-hidden bg-black shadow-sm">
+                        <iframe src="${url}" width="100%" height="100%" frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                `).join('');
+                videosSection.classList.remove('hidden');
+            } else {
+                videoList.innerHTML = '';
+                videosSection.classList.add('hidden');
+            }
+
             document.getElementById('moduleModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
