@@ -541,23 +541,23 @@
             </div>
             <div class="p-6 overflow-y-auto flex-1">
                 <p id="moduleModalDesc" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
+                <!-- Botón Público en general -->
+                <div class="mb-4">
+                    <p class="text-xs text-gray-400 text-center mb-2">A tu ritmo</p>
+                    <button onclick="expandModuleSections()" class="w-full bg-agro-accent text-white font-bold py-3 rounded-lg hover:brightness-110 transition flex justify-center items-center gap-2">
+                        <i data-lucide="book-open" class="h-5 w-5"></i> Público en general
+                    </button>
+                </div>
                 <!-- Acordeón de secciones (se muestra solo si el módulo tiene sections) -->
-                <div id="moduleModalVideos" class="hidden mb-6">
+                <div id="moduleModalVideos" class="hidden mb-4">
                     <div id="moduleModalVideoList" class="flex flex-col gap-2"></div>
                 </div>
-                <div class="flex flex-col gap-3 mt-2">
-                    <div>
-                        <p class="text-xs text-gray-400 text-center mb-2">A tu ritmo</p>
-                        <button onclick="expandModuleSections()" class="w-full bg-agro-accent text-white font-bold py-3 rounded-lg hover:brightness-110 transition flex justify-center items-center gap-2">
-                            <i data-lucide="book-open" class="h-5 w-5"></i> Público en general
-                        </button>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-400 text-center mb-2">¿Eres Técnico del programa?</p>
-                        <a id="moduleModalLink" href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-agro text-white font-bold py-3 rounded-lg hover:bg-agro-dark transition flex justify-center items-center gap-2">
-                            <i data-lucide="log-in" class="h-5 w-5"></i> Ingresar a la plataforma
-                        </a>
-                    </div>
+                <!-- Botón Técnicos -->
+                <div>
+                    <p class="text-xs text-gray-400 text-center mb-2">¿Eres Técnico del programa?</p>
+                    <a id="moduleModalLink" href="https://capacitacion.cosob.mx/" target="_blank" class="w-full bg-agro text-white font-bold py-3 rounded-lg hover:bg-agro-dark transition flex justify-center items-center gap-2">
+                        <i data-lucide="log-in" class="h-5 w-5"></i> Ingresar a la plataforma
+                    </a>
                 </div>
             </div>
         </div>
