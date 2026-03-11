@@ -548,7 +548,7 @@
                 <div class="flex flex-col gap-3 mt-2">
                     <div>
                         <p class="text-xs text-gray-400 text-center mb-2">A tu ritmo</p>
-                        <button onclick="closeModuleModal()" class="w-full bg-agro-accent text-white font-bold py-3 rounded-lg hover:brightness-110 transition flex justify-center items-center gap-2">
+                        <button onclick="expandModuleSections()" class="w-full bg-agro-accent text-white font-bold py-3 rounded-lg hover:brightness-110 transition flex justify-center items-center gap-2">
                             <i data-lucide="book-open" class="h-5 w-5"></i> Público en general
                         </button>
                     </div>
@@ -747,6 +747,18 @@
         function closeModuleModal() {
             document.getElementById('moduleModal').classList.add('hidden');
             document.body.style.overflow = '';
+        }
+
+        function expandModuleSections() {
+            document.querySelectorAll('#moduleModalVideoList > div').forEach(function(section) {
+                var body = section.querySelector('div');
+                var chev = section.querySelector('.chev');
+                if (body && body.classList.contains('hidden')) {
+                    body.classList.remove('hidden');
+                    if (chev) chev.classList.add('rotate-180');
+                }
+            });
+            document.querySelector('#moduleModal .overflow-y-auto').scrollTop = 0;
         }
 
 // --- Integración Gemini API ---
