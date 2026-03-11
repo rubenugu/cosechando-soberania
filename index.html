@@ -711,8 +711,11 @@
             lucide.createIcons({ nodes: [iconEl] });
             document.getElementById('moduleModalLink').href = m.url || 'https://capacitacion.cosob.mx/';
 
-            // Renderizar acordeón de secciones si el módulo las tiene
+            // Siempre mostrar toggle Público en general y ocultar secciones al abrir
+            document.getElementById('publicoSection').classList.remove('hidden');
+            document.getElementById('publicoChev').classList.remove('rotate-180');
             const videosSection = document.getElementById('moduleModalVideos');
+            videosSection.classList.add('hidden');
             const videoList = document.getElementById('moduleModalVideoList');
             if (m.sections && m.sections.length > 0) {
                 videoList.innerHTML = m.sections.map(section => `
@@ -739,13 +742,8 @@
                         </div>
                     </div>
                 `).join('');
-                videosSection.classList.add('hidden');
-                document.getElementById('publicoSection').classList.remove('hidden');
-                document.getElementById('publicoChev').classList.remove('rotate-180');
             } else {
-                videoList.innerHTML = '';
-                document.getElementById('publicoSection').classList.add('hidden');
-                videosSection.classList.add('hidden');
+                videoList.innerHTML = '<p class="text-sm text-gray-400 italic text-center py-4">Contenido disponible próximamente.</p>';
             }
 
             document.getElementById('moduleModal').classList.remove('hidden');
