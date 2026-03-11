@@ -96,15 +96,21 @@
             <!-- Panel 1: Usuarios generales -->
             <div class="hero-bg flex-1 flex items-center min-h-[440px] md:min-h-[540px]">
                 <div class="px-8 md:px-12 lg:px-16 py-20 md:py-28 w-full">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-sm mb-6 border border-white/30">
-                        <i data-lucide="book-open" class="h-4 w-4 text-agro-accent"></i>
-                        <span>Acceso libre al catálogo</span>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-sm border border-white/30">
+                            <i data-lucide="book-open" class="h-4 w-4 text-agro-accent"></i>
+                            <span>Acceso libre al catálogo</span>
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-agro-accent/80 backdrop-blur-sm text-sm border border-agro-accent/50">
+                            <i data-lucide="users" class="h-4 w-4 text-white"></i>
+                            <span>Público en general</span>
+                        </div>
                     </div>
                     <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
-                        Explora nuestra formación agroecológica
+                        Formación agroecológica abierta para todos
                     </h1>
                     <p class="text-base md:text-lg mb-8 text-gray-100 max-w-md leading-relaxed">
-                        Consulta libremente todos nuestros módulos e información del programa. Sin registro, sin evaluaciones, a tu propio ritmo.
+                        Sin importar tu experiencia o dónde estés, explora nuestros módulos, videos y materiales de forma gratuita. Sin registro, sin evaluaciones, a tu propio ritmo.
                     </p>
                     <button onclick="const el=document.getElementById('catalogo');window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'})" class="bg-agro-accent text-white font-bold px-8 py-4 rounded-lg text-lg hover:brightness-125 transition shadow-lg inline-flex items-center gap-2 hover:-translate-y-1 transform duration-200">
                         Explorar Catálogo
